@@ -25,6 +25,6 @@ HOW TO USE:
 2) Run the java file "BabyRunner" and give it "yob2014.txt" as an argument.
    (Example: "java BabyRunner yob2014.txt")
 
-3) From you first select want kind of data structure you'd like to use and then
+3) From here you first select want kind of data structure you'd like to use and then
   which operation you'd like to perform. This continues on a loop until you exit
   the program.
