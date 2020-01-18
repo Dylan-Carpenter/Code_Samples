@@ -6,6 +6,8 @@ import java.lang.*;
 public class BabyRunner {
 
     public static void main(String[] args){
+
+        //check that the user provided the name of the file
         if(args.length != 1){
             System.err.println("Incorrect amount of arguments");
             System.exit(1);
@@ -14,34 +16,34 @@ public class BabyRunner {
         String babyFile = args[0];
         System.out.println(" ");
 
-        //LinkedList stuff
+        //initialize data strucutres
         ArrayList<Baby> babyGirls = new ArrayList<Baby>();
         ArrayList<Baby> babyBoys = new ArrayList<Baby>();
 
-        //Hashmap stuff
         HashMap<String, Baby> babyMap = new HashMap<String, Baby>();
 
         BinaryTree babyTree = new BinaryTree();
 
 
-
+        //initialize scanner and relevant counters
         Scanner console = new Scanner(System.in);
 
         int linkedListCounter = 0;
         int hashMapCounter = 0;
         int treeCounter = 0;
 
+        //main loop
         for(;;){
 
+            //prompt user fpr data structure and operations
             System.out.println("Please input which data structure you would like to use: \n 1 = Tree \n 2 = Hash Map \n 3 = Linear Data Structure \n");
             String structure = console.next();
             System.out.println("Which task would you like performed? \n 1 = Search for a name \n 2 = Most Popular Names \n 3 = Unique Names \n 4 = Display Names \n");
             String function = console.next();
 
-
-
             String selectedDataStruct = " ";
 
+            //check if data needs to be loaded into data structures and set the selected data structure string
             if((structure.equals("3")) && (linkedListCounter == 0)){
                 babyGirls = BabyArrayList.loadGirls(babyFile);
                 babyBoys = BabyArrayList.loadBoys();
@@ -68,6 +70,7 @@ public class BabyRunner {
                 selectedDataStruct = "Binary Tree";
             }
 
+            //check which function the user selected and execute the correct one
             if(function.equals("1")){
 
                 System.out.print("Please enter which name you would like to search for:  \n");

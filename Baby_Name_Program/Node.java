@@ -1,5 +1,6 @@
 import java.util.*;
 
+//basic node class for tree
 public class Node {
 
   private Node parent;
