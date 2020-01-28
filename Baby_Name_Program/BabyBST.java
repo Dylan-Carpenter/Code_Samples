@@ -11,6 +11,7 @@ public class BabyBST {
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_BLUE = "\u001B[34m";
 
+  //initialize variables
   public static Baby[] topMale = new Baby[10];
   public static Baby[] topFemale = new Baby[10];
   public static int numFemale = 0;

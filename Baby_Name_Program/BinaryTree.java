@@ -16,13 +16,14 @@ public class BinaryTree {
   }
 
 
-
+    //retreives baby node from the tree
     public Baby getBaby(Node root, String name) {
 
       Baby baby = new Baby();
 
       Node current = root;
 
+      //traverses tree to find baby
       while(current != null) {
         if ((name.compareTo(current.getBaby().name) < 0)) {
           current = current.getLeft();
@@ -39,7 +40,7 @@ public class BinaryTree {
     }
 
 
-
+  //inserts baby node into tree
   public void insertBabyName(Baby baby) {
 
     Node newNode = new Node(baby);
@@ -51,6 +52,7 @@ public class BinaryTree {
       Node parent = root;
       Node current = root;
 
+      //traverse tree and find correct place for baby
       while(current != null){
 
         parent = current;
@@ -86,67 +88,4 @@ public class BinaryTree {
       }
     }
   }
-
-  public void rotateRight(){
-
-    Node newLeft = null;
-
-    if(root.getLeft().getRight() != null){
-      newLeft = root.getLeft().getRight();
-    }
-
-    root.setParent(root.getLeft());
-
-    root.getLeft().setRight(root);
-
-    if(newLeft != null){
-      root.setLeft(newLeft);
-    }
-
-    root = root.getParent();
-  }
-
-  public void rotateLeft(){
-
-    Node newRight = null;
-
-    if(root.getRight().getLeft() != null){
-      newRight = root.getRight().getLeft();
-    }
-
-    root.setParent(root.getRight());
-
-    root.getRight().setLeft(root);
-
-    if(newRight != null){
-      root.setRight(newRight);
-    }
-
-    root = root.getParent();
-  }
-
-  public void insertMaleFreq(Node root, Baby baby) {
-
-
-  }
-
-  public void insertFemaleFreq(Node root, Baby baby) {
-
-  }
-
-
-  public void deleteBaby() {
-
-
-  }
-
-
-
-
-
-
-
-
-
-
 }
