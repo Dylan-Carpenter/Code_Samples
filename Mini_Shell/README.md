@@ -18,16 +18,16 @@ Features:
 
 ## Usage
 ### Compilation
-'''bash
+'''
 make
 '''
 
 ### Clean
-'''bash
+'''
 make clean
 '''
 
 ### Execute
-'''bash
+'''
 ./msh
 '''
