@@ -18,10 +18,14 @@ Features:
 
 ## Usage
 ### Compilation
-  make
-
+```
+make
+```
 ### Clean
-  make clean
-
+```
+make clean
+```
 ### Execute
-  ./msh
+```
+./msh
+```
