@@ -36,8 +36,6 @@
 
 /* Prototypes */
 
-//int processline (char *line, int outfd, int waitFlag);
-
 /* Shell main */
 
 int mainargcp;
@@ -99,7 +97,8 @@ main (int mainargc, char **mainargv)
 }
 
 /*processline function*/
-
+//Take a line as input and process it as necessary
+//Calls functions for comments, pipes, and redirects
 int processline (char *line, int infd, int outfd, int errfd, int Flags)
 {
 
@@ -135,7 +134,7 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
         do{
             new[index] = '\0';
             char* command = &new[start];
-            //dprintf(1,"%s\n",command);
+
             start = index + 1;
             pipe(pipefd);
             processline(command, readEnd, pipefd[1], cerrfd, DONTWAIT | NOEXPAND);
@@ -144,11 +143,11 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
                 close(readEnd);
             }
             readEnd = pipefd[0];
-            //new[index] = '|';
+
         }while((index = checkComment(start,new,'|')) != -1);
 
         char* command = &new[start];
-        //dprintf(1,"%s\n",command);
+
         processline(command, readEnd, outfd, cerrfd, WAIT & Flags);
         close(readEnd);
         while(waitpid(-1, &status, WNOHANG) > 0);
@@ -156,70 +155,11 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
         return 1;
     }
 
-    /*
-    int i = 0;
-    int pipeLineHappened = 0;
-    int pipefd[2];
-    int readEnd;
-    while(new[i] != '\0'){
-        dprintf(1,"%c\n",new[i]);
-        if(new[i] == '|'){
-            pipeLineHappened = 1;
-            int j = i-1;
-            while((new[j] != '|') && (j != 0)){
-                j--;
-            }
-            while(new[j] == '|'){
-                j++;
-            }
-            char* command = &new[j];
-            readEnd = pipefd[0];
-
-            pipe(pipefd);
-
-            new[i] = '\0';
-            dprintf(1,"%s%s\n","command: ",command);
-            if(cinfd == 0){
-                processline(command, cinfd, pipefd[1], cerrfd, 2);
-                dprintf(1,"%s\n","in if");
-                dprintf(1,"%s%d\n", "pipefd[0]: ",readEnd);
-                dprintf(1,"%s%d\n", "pipefd[1]: ",pipefd[1]);
-                close(pipefd[1]);
-            }else{
-                processline(command, readEnd, pipefd[1], cerrfd, 2);
-                dprintf(1,"%s\n","in else");
-                dprintf(1,"%s%d\n", "pipefd[0]: ",readEnd);
-                dprintf(1,"%s%d\n", "pipefd[1]: ",pipefd[1]);
-                close(readEnd);
-                close(pipefd[1]);
-            }
-            new[i] == '|';
-        }
-        i++;
-    }
-
-    //dprintf(1,"%d\n",pipeLineHappened);
-    /*
-    if(pipeLineHappened){
-        pipeLineHappened = 0;
-        int l = 0;
-        while(new[l] != '|'){
-            l--;
-        }
-        l++;
-        char* command = &new[l];
-        dprintf(1,"%s%d\n", "pipefd[0]: ",readEnd);
-        dprintf(1,"%s%d\n", "pipefd[1]: ",pipefd[1]);
-        processline(command, readEnd, coutfd, cerrfd, NOEXPAND | (Flags & 1));
-        close(readEnd);
-    }
-    */
-
     //**************************REDIRECTIONS*******************************//
 
     int i = 0;
     int inQuotes = 0;
-    //dprintf(1, "{%s}\n", new);
+
     while(new[i] != '\0'){
 
         if((new[i] == '\"') && (!inQuotes)){
@@ -270,8 +210,6 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
             fileName = &new[i];
             int saveIndex = i;
 
-            //*************SUPER NOT SURE ABOUT THIS CODE****************//
-
             char saveC;
 
             while((new[i] != '\0') && (new[i] != '>') && (new[i] != '<')){
@@ -303,32 +241,6 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
                     i++;
                 }
             }
-
-            //dprintf(1, "{%s}\n", new);
-
-            //*************SUPER NOT SURE ABOUT THIS CODE****************//
-
-            /*this code works
-
-            if(!inQuotes){
-                while((new[i] != ' ') && (new[i] != '\0') && (new[i] != '>') && (new[i] != '<')){
-                    i++;
-                }
-
-            }else{
-                while((new[i] != '\"') && (new[i] != '\0')){
-                    i++;
-                }
-                if(new[i] == '\"'){
-                    inQuotes = 0;
-                }
-            }
-
-            */
-
-
-            //char saveC = new[i];
-            //new[i] = '\0';
 
             //handles '>'
             if((!appendFlag) && (!errFlag)){
@@ -511,7 +423,6 @@ int processline (char *line, int infd, int outfd, int errfd, int Flags)
     /* Check for who we are! */
     if (cpid == 0) {
         /* We are the child! */
-        /* execlp (line, line, (char *)0);*/
 
         if(coutfd != 1){
             dup2(coutfd, 1);
