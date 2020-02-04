@@ -1,4 +1,4 @@
-# Code_Samples
+# School Projects
 Author: Dylan Carpenter
 Last Modified: 16 January 2020
 
