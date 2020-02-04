@@ -6,7 +6,7 @@ import java.text.*;
 
 public class BabyBST {
 
-  //pretty colors
+  //colors used to style output
   public static final String ANSI_RED = "\u001B[35m";
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_BLUE = "\u001B[34m";
