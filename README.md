@@ -1,6 +1,5 @@
 # School Projects
 Author: Dylan Carpenter
-Last Modified: 16 January 2020
 
 This respositoy contains selections of code/projects from my time at Western Washington University.
 The projects are split up into seperate directories each containing their own respective README files detailing them further.
