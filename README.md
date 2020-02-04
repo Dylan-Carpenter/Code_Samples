@@ -2,7 +2,7 @@
 Author: Dylan Carpenter
 
 This repository contains selections of code/projects from my time at Western Washington University.
-The projects are split up into seperate directories each containing their own respective README files detailing them further.
+The projects are split up into separate directories each containing their own respective README files detailing them further.
 
 The samples are as follows:
 
